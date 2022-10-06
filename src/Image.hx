@@ -91,22 +91,20 @@ abstract Image(UInt8Array) {
 
 	inline function getColorFromStartingBytePos(position:Int):Color {
 		position += OFFSET;
-		var c = 0x00000000;
-		c |= this[position] >> 24 & 0xFF;
-		c |= this[position + 1] >> 16 & 0xFF;
-		c |= this[position + 2] >> 8 & 0xFF;
-		c |= this[position + 3] >> 0xFF;
-
+		var c = 0xFF000000;
+		c |= this[position] << 24;
+		c |= this[position + 1] << 16;
+		c |= this[position + 2] << 8;
+		c |= this[position + 3];
 		return c;
 	}
 
-	inline function setColorFromStartingBytePos(position:Int, color:Int) {
+	inline function setColorFromStartingBytePos(position:Int, color:Color) {
 		position += OFFSET;
 		this[position] = color >> 24 & 0xFF;
 		this[position + 1] = color >> 16 & 0xFF;
 		this[position + 2] = color >> 8 & 0xFF;
 		this[position + 3] = color & 0xFF;
-
 		return color;
 	}
 
