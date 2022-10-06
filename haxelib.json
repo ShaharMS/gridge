@@ -1,0 +1,12 @@
+{
+    "name": "gridge",
+    "license": "MIT",
+    "version": "1.0.0",   
+    "description": "A bridge between the graphical types of different frameworks.",
+    "contributors": ["ShaharMS"],
+    "releasenote": "A bridge between the graphical types of different frameworks",
+    "tags": ["cross", "image"],
+    "classPath": "src",
+    "dependencies": {},
+    "url": "https://github.com/ShaharMS/gridge"
+}
