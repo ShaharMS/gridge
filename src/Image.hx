@@ -346,7 +346,55 @@ abstract Image(UInt8Array) {
 		drawLine(x + width, y + height, x, y + height, color);
 		drawLine(x, y + height, x, y, color);
 	}
-
+        /**
+                Draws a triangle outline of the given color.
+        	
+		This function is a shortcut for drawing a triangles with drawLine.
+		
+		@param ax, ay, bx, by, cx, cy The cordinates of a triangle.
+                @param color The color to draw the outline with.
+        **/
+        public inline function drawTri(ax:Int, ay:Int, bx:Int, by:Int, cx:Int, cy:Int, color: Color){
+		drawLine( ax, ay, bx, by, color );
+		drawLine( bx, by, cx, cy, color );
+		drawLine( cx, cy, ax, ay, color );
+	}
+	/**
+                Fills a triangle of the given color.
+	
+	       	@param ax, ay, bx, by, cx, cy The cordinates of a triangle.
+                @param color The color to draw the fill with.
+                @param drawEdges optional to allow perhaps cleaner edges?
+        **/
+   	public inline function fillTri(ax:Int, ay:Int, bx:Int, by:Int, cx:Int, cy:Int, color: Color, ?drawEdges:Bool = false){
+		// contribution - nanjizal.net ( Justin L Mills ).
+		var maxX = Std.int( Math.max( Math.max( ax, bx ), cx ) );
+        	var minX = Std.int( Math.min( Math.min( ax, bx ), cx ) );
+        	var maxY = Std.int( Math.max( Math.max( ay, by ), cy ) );
+        	var minY = Std.int( Math.min( Math.min( ay, by ), cy ) );
+        	var s0 = ay*cx - ax*cy;
+        	var sx = cy - ay;
+        	var sy = ax - cx;
+        	var t0 = ax*by - ay*bx;
+        	var tx = ay - by;
+        	var ty = bx - ax;
+        	var A = -by*cx + ay*(-bx + cx) + ax*(by - cy) + bx*cy;
+        	for(x in minX...maxX){
+            		for(y in minY...maxY){
+                		if(triCalc(x, y, s0, t0, sx, sy, tx, ty, A)) setPixel(x, y, color);
+            		}
+        	}
+		it( drawEdges ) drawTri( ax, ay, bx, by, cx, cy, color );
+    	}
+    	inline function triCalc(x: Float, y: Float, s0: Float, t0: Float, sx: Float, sy: Float, tx: Float, ty: Float, A: Float ): Bool {
+                var s = s0 + sx*x + sy*y;
+                var t = t0 + tx*x + ty*y;
+                return if (s <= 0 || t <= 0) {
+               		false;
+        	} else {
+            		(s + t) < A;
+        	}
+    	}
 	/**
 		Returns a portion of the image, specified by a rectangle.
 
