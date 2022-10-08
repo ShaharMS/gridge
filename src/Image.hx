@@ -381,7 +381,7 @@ abstract Image(UInt8Array) {
         	var A = -by*cx + ay*(-bx + cx) + ax*(by - cy) + bx*cy;
         	for(x in minX...maxX){
             		for(y in minY...maxY){
-                		if(triCalc(x, y, s0, t0, sx, sy, tx, ty, A)) setARGB(x, y, color);
+                		if(triCalc(x, y, s0, t0, sx, sy, tx, ty, A)) setPixel(x, y, color);
             		}
         	}
 		it( drawEdges ) drawTri( ax, ay, bx, by, cx, cy, color );
