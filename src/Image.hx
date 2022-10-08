@@ -395,7 +395,6 @@ abstract Image(UInt8Array) {
             		(s + t) < A;
         	}
     	}
-	**/
 	/**
 		Returns a portion of the image, specified by a rectangle.
 
