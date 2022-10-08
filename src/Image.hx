@@ -360,7 +360,7 @@ abstract Image(UInt8Array) {
 		drawLine( cx, cy, ax, ay, color );
 	}
 	/**
-               Fills a triangle of the given color.
+                Fills a triangle of the given color.
 	
 	       	@param ax, ay, bx, by, cx, cy The cordinates of a triangle.
                 @param color The color to draw the fill with.
